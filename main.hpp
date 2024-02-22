@@ -43,9 +43,14 @@ void printNumbers(struct Node *head)
 }
 int getLength(struct Node *head)
 {
-    /*******************************
-     * Code your program here
-     *******************************/
+    struct Node *ptr = head;
+    int cnt = 0;
+    while (ptr != NULL)
+    {
+        cnt++;
+        ptr = ptr->next;
+    }
+    return cnt;
 }
 struct Node *sortNumbers(struct Node *head)
 {
