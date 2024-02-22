@@ -18,16 +18,16 @@ struct Node *makeNumbers(int N)
 {
     struct Node *head, *tmp, *prev;
     for(int i = 0; i < N; i++) {
-        tmp = (struct Node *)malloc(sizeof(struct Node));   //during each loop - alloc mem for struct Node
-        tmp->value = rand() % 100;  //
-        tmp->next = NULL;
-        if(i == 0) {
+        tmp = (struct Node *)malloc(sizeof(struct Node));   //during each loop - alloc mem to pointer tmp for struct Node
+        tmp->value = rand() % 100;  //assign a random number to double value in struct Node
+        tmp->next = NULL;   //next in struct Node assigned with NULL
+        if(i == 0) {    //If first loop, the first node(tmp) assigned to pointer head
             head = tmp;
         }
-        else {
+        else {  //else, pointer prev at node next pointing to pointer tmp
             prev->next = tmp;
         }
-        prev = tmp;
+        prev = tmp; //pointer prev assigned with pointer tmp
     }
     return head;
 }
@@ -54,14 +54,20 @@ int getLength(struct Node *head)
 }
 struct Node *sortNumbers(struct Node *head)
 {
-    /*******************************
-     * Code your program here
-     *******************************/
+    struct Node *ptr, *prev, *after;
+    
+
+    while(ptr != NULL) {
+        after = ptr->next;
+        prev->next = after;
+        ptr->next = after->next;
+        after->next = ptr;
+    }
+
 }
 
-struct Node *swapNode(struct Node *prev, struct Node *ptr)
+/*struct Node *swapNode(struct Node *prev, struct Node *ptr)
 {
-    /*******************************
-     * Code your program here
-     *******************************/
-}
+    double temp;
+
+}*/
