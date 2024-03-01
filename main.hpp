@@ -12,11 +12,12 @@ struct Node *makeNumbers(int N);
 void printNumbers(struct Node *head);
 int getLength(struct Node *head);
 struct Node *sortNumbers(struct Node *head);
-struct Node *swapNode(struct Node *prev, struct Node *ptr);
+void swapNode(struct Node *prev, struct Node *ptr);
 
 struct Node *makeNumbers(int N)
 {
     struct Node *head, *tmp, *prev;
+    srand(time(0));
     for(int i = 0; i < N; i++) {
         tmp = (struct Node *)malloc(sizeof(struct Node));   //during each loop - alloc mem to pointer tmp for struct Node
         tmp->value = rand() % 100;  //assign a random number to double value in struct Node
@@ -41,6 +42,7 @@ void printNumbers(struct Node *head)
     }
     cout << endl;
 }
+
 int getLength(struct Node *head)
 {
     struct Node *ptr = head;
@@ -52,22 +54,32 @@ int getLength(struct Node *head)
     }
     return cnt;
 }
+
 struct Node *sortNumbers(struct Node *head)
 {
-    struct Node *ptr, *prev, *after;
-    
+    struct Node *ptr, *after;
+    bool swapped = true;
 
-    while(ptr != NULL) {
+    while(swapped) {
+        swapped = false;
+        ptr = head;
         after = ptr->next;
-        prev->next = after;
-        ptr->next = after->next;
-        after->next = ptr;
+        while(after != nullptr) {
+            if(ptr->value > after->value) {
+                swapNode(ptr, after);
+                swapped = true;
+            }
+            ptr = ptr->next;
+            after = after->next;
+        }
     }
-
+    
+    return head;
 }
 
-/*struct Node *swapNode(struct Node *prev, struct Node *ptr)
+void swapNode(struct Node *prev, struct Node *ptr)
 {
-    double temp;
-
-}*/
+    double temp = prev->value;
+    prev->value = ptr->value;
+    ptr->value = temp;
+}
